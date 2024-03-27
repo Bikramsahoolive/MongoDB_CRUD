@@ -14,16 +14,16 @@ dbrouter.route('/read-all')
 dbrouter.route('/read-filter')
 .post(getFilteredData);
 
-dbrouter.route('/read-one')
+dbrouter.route('/read-one/:id')
 .get(getOneData);
 
-dbrouter.route('/update-one')
+dbrouter.route('/update-one/:id')
 .patch(updateOneData);
 
-dbrouter.route('/update-many')
+dbrouter.route('/update-many/:id')
 .patch(updateManyData);
 
-dbrouter.route('/delete-one')
+dbrouter.route('/delete-one/:id')
 .delete(deleteOneData);
 
 dbrouter.route('/delete-many')

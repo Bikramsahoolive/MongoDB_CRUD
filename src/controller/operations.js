@@ -88,7 +88,7 @@ const db = client.db('applicants');
     try {
       await client.connect();
       const collection = db.collection('user');
-      const result = await collection.findOne({ _id: ObjectId(id)});
+      const result = await collection.findOne({ _id:new ObjectId(id)});
   
       // console.log(result);
       res.send(result);
@@ -106,7 +106,7 @@ const db = client.db('applicants');
     try {
       await client.connect();
       const collection = db.collection('user');
-      const result = await collection.updateOne({ _id: ObjectId(id)},{$set:data});
+      const result = await collection.updateOne({ _id:new ObjectId(id)},{$set:data});
   
       // console.log(result);
       res.send(result);
@@ -118,12 +118,13 @@ const db = client.db('applicants');
   }
 
   export async function updateManyData(req,res) {
-
+      const id = req.params.id;
+      const data = req.body;
     try {
       await client.connect();
       const collection = db.collection('user');
-      const filter = {phone:9998887770}; 
-      const update = {$set:{phone:'9776999501'}};
+      const filter = {email:(id)};// in case of number (+id) or Number(id);
+      const update = {$set:data};
       const result = await collection.updateMany(filter,update);
   
       // console.log(result);
@@ -141,7 +142,7 @@ const db = client.db('applicants');
     try {
       await client.connect();
       const collection = db.collection('user');
-      const result = await collection.deleteOne({ _id: ObjectId(id)});
+      const result = await collection.deleteOne({ _id:new ObjectId(id)});
   
       // console.log(result);
       res.send(result);
